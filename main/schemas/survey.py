@@ -38,6 +38,7 @@ class CreateQuestionSchema(_BaseQuestionSchema):
 
 # PUT Question Request DTO
 class UpdateQuestionSchema(_BaseQuestionSchema):
+    # Existing question id. For new question, id is optional
     id: Optional[int]
     # Set required fields to be optional in PUT request
     title: Optional[constr(max_length=255)]

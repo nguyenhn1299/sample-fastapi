@@ -72,6 +72,7 @@ class SurveyService:
         if not db_survey:
             return
 
+        # TODO: Get questions by IDs -> Then, sort questions by defined question orders. To optimize, use
         db_survey.questions = []
         for question_id in db_survey.question_orders:
             db_survey.questions.append(self._get_question(_id=question_id, survey_id=db_survey.id))
