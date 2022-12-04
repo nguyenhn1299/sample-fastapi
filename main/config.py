@@ -27,6 +27,7 @@ class Config:
         os.getenv("POSTGRES_PORT"),
         os.getenv("POSTGRES_DB"),
     )
+    DEFAULT_PAGINATION_SIZE: int = 10
 
 
 config = Config()

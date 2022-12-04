@@ -10,17 +10,7 @@ engine = create_engine(
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
-@as_declarative()
-class DeclarativeBaseModel:
-    @declared_attr
-    def __tablename__(cls):
-        object_name = cls.__name__.replace("Model", "")
-        return object_name.lower() + "s"
-
-    id = Column(Integer, primary_key=True)
-
-
-BaseModel = declarative_base(cls=DeclarativeBaseModel)
+BaseModel = declarative_base()
 
 
 def get_db():
