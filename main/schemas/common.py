@@ -1,8 +1,8 @@
 from datetime import datetime
-from typing import Optional, List, TypeVar, Generic
+from typing import Optional, List, TypeVar, Generic, Annotated
 from fastapi import Query
 
-from pydantic import conint, BaseModel
+from pydantic import BaseModel, Field
 from pydantic.generics import GenericModel
 
 from main import config
@@ -29,14 +29,14 @@ class PaginationSchema(BaseModel):
 
 
 class QueryParamsPageSchema(BaseModel):
-    page: conint(gt=0) = 1
-    per_page: conint(gt=0, le=100) = config.DEFAULT_PAGINATION_SIZE
+    page: Annotated[int, Field(strict=True, gt=0)] = 1
+    per_page: Annotated[int, Field(strict=True, gt=0, le=100)] = config.DEFAULT_PAGINATION_SIZE
     search: Optional[str] = Query(None)
 
 
 class GetPageSchema(GenericModel, Generic[T]):
-    page: conint(gt=0) = 1
-    per_page: conint(gt=0, le=100) = config.DEFAULT_PAGINATION_SIZE
+    page: Annotated[int, Field(strict=True, gt=0)] = 1
+    per_page: Annotated[int, Field(strict=True, gt=0, le=100)] = config.DEFAULT_PAGINATION_SIZE
     items: List[T]
-    total: conint(ge=0)
+    total: Annotated[int, Field(strict=True, gt=0)]
 
