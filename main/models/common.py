@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import Column, DateTime, String
 
@@ -10,7 +10,7 @@ class PersonMixin:
 
 
 class TimestampMixin:
-    created = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created = Column(DateTime, default=datetime.now(timezone.utc), nullable=False)
     updated = Column(
-        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
+        DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc), nullable=False
     )
